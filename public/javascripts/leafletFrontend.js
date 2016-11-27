@@ -10,7 +10,6 @@ basemap0.addTo(mymap);
 Esri_WorldImagery.addTo(mymap);
 const position = [64.127, -21.817];
 
-
 var data = [[64.127, -21.817, 'Thetta er mynd af einhverju'],
             [64.117, -21.807, 'Thetta er onnur mynd af einhverju'],
            ];
@@ -29,3 +28,20 @@ var mynd = L.icon({
   popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 L.marker([64.121, -21.817], {icon: mynd}).addTo(mymap);
+
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+        : 'Hover over a state');
+};
+
+info.addTo(mymap);
