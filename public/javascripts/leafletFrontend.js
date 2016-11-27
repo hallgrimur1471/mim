@@ -39,9 +39,21 @@ info.onAdd = function (map) {
 
 // method that we will use to update the control based on feature properties passed
 info.update = function (props) {
-    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-        '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-        : 'Hover over a state');
+  this._div.innerHTML = '<h1>Import image</h1>'
+                        +'<p>Welcome to the Import image page!</p>'
+                        +'<form method="POST" action="/" enctype="multipart/form-data">'
+                        +'<p></p>'
+                        +'<label for="image_title">New image title: </label>'
+                        +'<input id="image_title" type="text" name="title" placeholder="title">'
+                        +'<p></p>'
+                        +'<label for="image_import">Import image: </label>'
+                        +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
+                        +'<p></p>'
+                        +'<button class="btn btn-primary" type="submit">Submit'
+                        +'</button></form>';
+//  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+//      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+//      : 'Hover over a state');
 };
 
 info.addTo(mymap);
