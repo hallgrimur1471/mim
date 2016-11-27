@@ -15,8 +15,9 @@ block content
     Esri_WorldImagery.addTo(mymap);
     const position = [64.127, -21.817];
 
-    var data = [[64.127, -21.817, "Thetta er mynd af einhverju"],
-          [64.117, -21.807, "Thetta er onnur mynd af einhverju"],
+
+    var data = [[64.127, -21.817, 'Thetta er mynd af einhverju'],
+          [64.117, -21.807, 'Thetta er onnur mynd af einhverju'],
           ];
 
     for (var i = 0; i < data.length; i++) {
@@ -24,3 +25,13 @@ block content
           .bindPopup(data[i][2])
           .addTo(mymap);
           }
+
+    var mynd = L.icon({
+          iconUrl: src="geotagged_photo_from_nexus.jpg",
+
+          iconSize:     [50, 50], // size of the icon
+          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+          });
+
+          L.marker([64.121, -21.817], {icon: mynd}).addTo(mymap);
