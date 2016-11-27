@@ -1,0 +1,16 @@
+installa mongodb
+bæta C:\Program Files\MongoDB\Server\3.2\bin í environmental variables. Ég þurfti að færa þessa slóð efst í 
+	env. var. til þess að geta keyrt mongod.exe og mongo.exe hvar sem er á tölvunni.
+
+opna eitt instance af cmd/cli inni í viðkomandi möppu. 
+-Keyra "mongod"
+(Þetta er serverinn fyrir database)
+
+Opna annað cmd
+-Keyra "mongo"
+	Hér ertu að setja inn gögnin með sql. Eða velja hvaða database þú vilt nota.
+	Til að velja okkar database þá gerum við "use leaflet_map" 
+		(Ef database nafnið er ekki til þá býr þessi skipun sjálfkrafa til það database)
+
+Þegar búið er að bæta við gögnum þá má 
+opna enn annan cmd og keyra "npm start"
