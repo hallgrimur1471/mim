@@ -14,23 +14,13 @@ block content
     basemap0.addTo(mymap);
     Esri_WorldImagery.addTo(mymap);
     const position = [64.127, -21.817];
-    /*const map = (
-    <Map center={position} zoom={13}>
-    <TileLayer
-    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    />
-    <Marker position={position}>
-    <Popup>
-    <span>A pretty CSS3 popup.<br/>Easily customizable.</span>
-    </Popup>
-    </Marker>
-    </Map>
-    );
-    render(map, document.getElementById('mymap'));*/
-    L.marker([64.127, -21.817]).addTo(mymap)
-    .bindPopup('Thetta er mynd af einhverju');
-    L.marker([64.117, -21.807]).addTo(mymap)
-    .bindPopup('Thetta er onnur mynd af einhverju');
-    L.marker([64.147, -21.707]).addTo(mymap)
-    .bindPopup('Thetta er thridja mynd af einhverju');
+
+    var data = [[64.127, -21.817, "Thetta er mynd af einhverju"],
+          [64.117, -21.807, "Thetta er onnur mynd af einhverju"],
+          ];
+
+    for (var i = 0; i < data.length; i++) {
+          marker = new L.marker([data[i][0],data[i][1]])
+          .bindPopup(data[i][2])
+          .addTo(mymap);
+          }
