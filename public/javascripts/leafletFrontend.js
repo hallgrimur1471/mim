@@ -25,59 +25,51 @@ L.control.layers(baseLayers).addTo(mymap);
     var mynd = L.icon({
           iconUrl: src="geotagged_photo_from_nexus.jpg",
 
-          iconSize:     [50, 50], // size of the icon
-          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+          icony:     [400, 400], // size of the icon
+          iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
+          popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
           });
 
-    var data = [[64.127, -21.817, 'Thetta er mynd af einhverju'],
-          [64.117, -21.807, 'Thetta er onnur mynd af einhverju'],
-          ];
+    var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
+  [64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
 
 
-          var customOptions =
-              {
-              'maxWidth': '500',
-              'minWidth': '300',
-              'className' : 'custom',
-               'navbar' : '0'
-              }
 
     for (var i = 0; i < data.length; i++) {
           marker = new L.marker([data[i][0],data[i][1]])
-          .bindPopup("<img id='image' src='thumbnail.png'/><br>" + data[i][2])
-          .addTo(mymap);
+          .bindPopup('<img style="width:100%"  id="image"+ i alt="'+ data[i][2] +'" src="/'+ data[i][3] +'" ><br>' + data[i][2], {minWidth:100})
+          .addTo(mymap).on('dblclick', onDoubleClick);
           marker.on('mouseover', function (e) {
-            this.show();
+            this.openPopup();
           });
           marker.on('mouseout', function (e) {
             this.closePopup();
           });
-        //  marker.on('click', function (e) {
-            //this.closePopup();
-        //    var viewer = new Viewer(document.getElementById('image', customOptions));
-        //    viewer.show();
-        //  });
-
-          }
-      /*    var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-      imageBounds = [[64.127, -74.22655], [40.773941, -74.12544]];
-[64.127, -21.817
-          var overlay = new L.ImageOverlay("geotagged_photo_from_nexus.jpg", {
-              opacity: 0.5
-          });
-          map.addLayer(basemap0);
-
-          L.DomEvent.on(overlay._image, 'click', function(e) {
-              console.log(e)
-          })*/
-        //  marker1.bindPopup( "<img src=" + icon_url + "/> Current temperature in " + location + " is: " + temp_f)
-
-          //"img src=" + icon_url + "geotagged_photo_from_nexus.jpg"
-
-//          marker1.bindPopup( "<img src=" + icon_url + "/> Current temperature in " + location + " is: " + temp_f)
 
 
 
 
-          L.marker([64.121, -21.817], {icon: mynd}).addTo(mymap);
+
+function onDoubleClick(e) {
+
+
+  var modal = document.getElementById('myModal');
+
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById('image');
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+
+  modal.style.display = "block";
+  modal.style.zIndex = 1000;
+  modalImg.src = img.src;
+  captionText.innerHTML = img.alt;
+
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+}
+}
+  
