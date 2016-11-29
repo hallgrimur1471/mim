@@ -175,7 +175,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
     console.log('GPS:\n' + JSON.stringify(gps));
     console.log('GPS LONGTITUDE: \n' + gps.GPSLongitude);
 
-    db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername) VALUES ($1, $2, $3, $4, $5, $6)`, [gps.GPSLongitude, gps.GPSLongitudeRef, gps.GPSLatitude, gps.GPSLatitudeRef, result.image.make, fileNameOnServer])
+    db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername) VALUES ($1, $2, $3, $4, $5, $6)`, [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, result.image.make, fileNameOnServer])
     .then(data => {
       console.log('<p>Gögnum bætt við!</p>');
       res.render('index_kort');
