@@ -13,7 +13,9 @@
     "express": "~4.14.0",
     "morgan": "~1.7.0",
     "multer": "^1.2.0",
+    "pg-promise": "^5.4.4",
     "pug": "~2.0.0-beta6",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xss": "^0.3.1"
   }
 }
