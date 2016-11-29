@@ -3,15 +3,16 @@
 
     var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    maxZoom: 18
+    maxZoom: 17
     });
     var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    maxZoom: 17
     });
 
     var mymap = L.map('mapid', {
 	    layers: [Esri_WorldImagery] // only add one!
-    }).setView([64.127, -21.817], 13);
+    }).setView([64.127, -21.817], 12);
 
     var baseLayers = {
 	"street map": basemap0,
@@ -108,6 +109,9 @@ function onDoubleClick(e) {
       }
   }
 }
+
+
+
 
 
 var helloPopup = L.popup().setContent();
