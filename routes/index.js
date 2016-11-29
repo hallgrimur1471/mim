@@ -51,7 +51,7 @@ router.get('/list', (req, res) => {
 router.get('/list/:id', (req, res) => {
   console.log(req.params);
   //const id = parseInt(req.params.id, 10);
-  const id = req.params.id.toString();
+  const imageservername = req.params.id.toString();
 
   // id til að birta notanda, notum xss library til að koma í veg fyrir xss
   const displayId = xss(req.params.id);
@@ -60,13 +60,21 @@ router.get('/list/:id', (req, res) => {
   //  res.send(`<p>${displayId} er ekki gilt</p>`)
   //}
 
-  db.one(`SELECT * FROM images WHERE id = $1`, [id])
+  db.one(`SELECT * FROM images WHERE imageservername = $1`, [imageservername])
     .then(data => {
       res.send(`<dl>
-  <dt>Nafn</dt>
-  <dd>${data.name}</dd>
-  <dt>Gögn</dt>
-  <dd>${data.data}</dd>
+        <dt>GPSLatitude</dt>
+        <dd>${data.gpslatitude}</dd>
+        <dt>GPSLatitudeRef</dt>
+        <dd>${data.gpslatituderef}</dd>
+        <dt>GPSLongtitude</dt>
+        <dd>${data.gpslongtitude}</dd>
+        <dt>GPSLongtitudeRef</dt>
+        <dd>${data.gpslongtituderef}</dd>
+        <dt>comment</dt>
+        <dd>${data.comment}</dd>
+        <dt>imageServerName</dt>
+        <dd>${data.imageservername}</dd>
 </dl>`);
     })
     .catch(error => {
