@@ -30,7 +30,22 @@ var mynd = L.icon({
 var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
 [64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
 
+//$.ajax({
+//    url: "api/getMarkers",
+//    context: document.body,
+//    success: function(results){
+//      console.log('RESULTS:\n' + results);
+//      //$(this).addClass("done");
+//    }
+//});
 
+$.ajax({url: "/api/getMarkers", success: function(results){
+//        $("#div1").html(results);
+        console.log('RESULTS:\n' + results);
+    }});
+
+//$.get( '/searching',parameters, function(data) {
+//       $('#results').html(data);
 
 for (var i = 0; i < data.length; i++) {
   marker = new L.marker([data[i][0],data[i][1]])

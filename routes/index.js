@@ -21,11 +21,13 @@ const upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  
-  
-  
   res.render('index_kort', { title: 'Express' });
 });
+
+// ajax test
+router.get('/api/getMarkers', function(req, res, next) {
+  res.send(`This is a delivery from the backend!`);
+})
 
 // GET list of items in database
 router.get('/list', (req, res) => {
