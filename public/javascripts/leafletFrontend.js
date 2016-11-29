@@ -47,6 +47,43 @@ L.control.layers(baseLayers).addTo(mymap);
           });
 
 
+}
+
+          var info = L.control();
+
+          info.onAdd = function (map) {
+              this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+              this.update();
+              this.addButton();
+              return this._div;
+          };
+
+          // method that we will use to update the control based on feature properties passed
+          info.update = function (props) {
+            this._div.innerHTML = '<h1>Import image</h1>'
+                                  +'<p>Welcome to the Import image page!</p>'
+                                  +'<form method="POST" action="/" enctype="multipart/form-data">'
+                                  +'<p></p>'
+                                  +'<label for="image_title">New image title: </label>'
+                                  +'<input id="image_title" type="text" name="title" placeholder="title">'
+                                  +'<p></p>'
+                                  +'<label for="image_import">Import image: </label>'
+                                  +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
+                                  +'<p></p>'
+                                  +'<button class="btn btn-primary" type="submit">Submit'
+                                  +'</button></form>';
+          //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+          //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+          //      : 'Hover over a state');
+          };
+
+
+
+          L.easyButton('<img alt="do this" src=/Button.png>', function(){mymap.addControl(info)}).addTo(mymap);
+          //mymap.addControl(info);
+
+
+
 
 
 
@@ -71,10 +108,13 @@ function onDoubleClick(e) {
       }
   }
 }
-}
 
-var helloPopup = L.popup().setContent('hello world');
 
-L.easyButton('<img src="/Button.png">', function(btn, mymap){
-    helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
+var helloPopup = L.popup().setContent();
+
+L.easyButton('<img src="/Button.png">', function(mymap){
+//  helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
+  info.hide();
+
+  //info.addTo(mymap);
 }).addTo(mymap);
