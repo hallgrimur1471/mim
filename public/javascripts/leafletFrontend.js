@@ -54,7 +54,6 @@ L.control.layers(baseLayers).addTo(mymap);
           info.onAdd = function (map) {
               this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
               this.update();
-              this.addButton();
               return this._div;
           };
 
@@ -75,9 +74,10 @@ L.control.layers(baseLayers).addTo(mymap);
           //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
           //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
           //      : 'Hover over a state');
+
           };
 
-
+          // Get the <span> element that closes the modal
 
           L.easyButton('<img alt="do this" src=/Button.png>', function(){mymap.addControl(info)}).addTo(mymap);
           //mymap.addControl(info);
