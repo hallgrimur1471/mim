@@ -23,14 +23,14 @@
 L.control.layers(baseLayers).addTo(mymap);
 
 
-    var mynd = L.icon({
+    /*var mynd = L.icon({
           iconUrl: src="geotagged_photo_from_nexus.jpg",
 
           icony:     [400, 400], // size of the icon
           iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
           popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
           });
-
+*/
     var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
   [64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
 
@@ -62,6 +62,7 @@ L.control.layers(baseLayers).addTo(mymap);
           info.update = function (props) {
             this._div.innerHTML = '<h1>Import image</h1>'
                                   +'<p>Welcome to the Import image page!</p>'
+                                  +'<span class="close" onclick="info.remove()">&times;</span>'
                                   +'<form method="POST" action="/" enctype="multipart/form-data">'
                                   +'<p></p>'
                                   +'<label for="image_title">New image title: </label>'
@@ -71,20 +72,26 @@ L.control.layers(baseLayers).addTo(mymap);
                                   +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
                                   +'<p></p>'
                                   +'<button class="btn btn-primary" type="submit">Submit'
-                                  +'</button></form>';
+                                  +'</button>'
+                                  +'</form>';
           //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
           //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
           //      : 'Hover over a state');
+
 
           };
 
           // Get the <span> element that closes the modal
 
-          L.easyButton('<img alt="do this" src=/Button.png>', function(){mymap.addControl(info)}).addTo(mymap);
+          L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
           //mymap.addControl(info);
 
 
 
+
+L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
+  mymap.setView([65.0082419, -18.8962449], 7);
+}).addTo(mymap);
 
 
 
@@ -112,13 +119,15 @@ function onDoubleClick(e) {
 
 
 
-
+/*
 
 var helloPopup = L.popup().setContent();
 
 L.easyButton('<img src="/Button.png">', function(mymap){
 //  helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
-  info.hide();
+  info.remove();
 
   //info.addTo(mymap);
 }).addTo(mymap);
+
+*/

@@ -25,6 +25,11 @@ html, body, #mapid {
   border-radius: 5px;
 }
 
+.info span {
+  font: 24px Arial, Helvetica, sans-serif;
+  color: #444;
+}
+
 .info h4 {
   margin: 0 0 5px;
   color: #777;
