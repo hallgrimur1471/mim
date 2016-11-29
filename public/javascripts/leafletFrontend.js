@@ -40,9 +40,9 @@ var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[6
 //});
 
 $.ajax({url: "/api/getMarkers", success: function(results){
-//        $("#div1").html(results);
-        console.log('RESULTS:\n' + results);
-    }});
+//  $("#div1").html(results);
+  console.log('RESULTS:\n' + results);
+}});
 
 //$.get( '/searching',parameters, function(data) {
 //       $('#results').html(data);

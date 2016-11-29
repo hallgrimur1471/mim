@@ -26,7 +26,28 @@ router.get('/', function(req, res, next) {
 
 // ajax test
 router.get('/api/getMarkers', function(req, res, next) {
-  res.send(`This is a delivery from the backend!`);
+
+  db.any(`SELECT * FROM images`) //LIMIT 10 OFFSET 0
+    .then(data => {
+      console.log('DATA:\n' + data[0]);
+      console.log('DATA:\n' + JSON.stringify(data));
+
+      //const result = [`<ul>`];
+
+      //data.forEach(row => {
+      //  console.log('ROW: ' + Object.keys(row));
+      //  console.log('ROW.imageservername: ' + row.imageservername);
+      //  result.push(`<li><a href="/list/${row.imageservername.toString()}">${row.imageservername.toString()}</a></li>`);
+      //})
+      //result.push('</ul>');
+
+      res.send(JSON.stringify(data));
+      //res.send(`This is a delivery from the backend!`);
+    })
+    .catch(error => {
+      res.send(`<p>Gat ekki sótt gögn: ${error}</p>`);
+    });
+
 })
 
 // GET list of items in database
