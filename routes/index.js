@@ -5,7 +5,7 @@ const pgp = require('pg-promise')();
 const xss = require('xss');
 
 const router = express.Router();
-const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@localhost/data';
+const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@localhost/mimdb2';
 const db = pgp(DATABASE);
 
 // location to store images
@@ -26,12 +26,17 @@ router.get('/', function(req, res, next) {
 
 // GET list of items in database
 router.get('/list', (req, res) => {
-  db.any(`SELECT * FROM data LIMIT 10 OFFSET 0`)
+  db.any(`SELECT * FROM images`) //LIMIT 10 OFFSET 0
     .then(data => {
+      console.log('DATA:\n' + JSON.stringify(data));
+
       const result = [`<ul>`];
 
       data.forEach(row => {
-        result.push(`<li><a href="/list/${row.id}">${row.name}</a></li>`);
+        console.log('ROW: ' + Object.keys(row));
+        console.log('ROW.imageservername: ' + row.imageservername.toString());
+        console.log('ROW.imageServerName: ' + row.imageServerName);
+        result.push(`<li><a href="/list/${row.imageservername.toString()}">${row.imageservername.toString()}</a></li>`);
       })
       result.push('</ul>');
 
@@ -44,16 +49,18 @@ router.get('/list', (req, res) => {
 
 // GET item in database
 router.get('/list/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
+  console.log(req.params);
+  //const id = parseInt(req.params.id, 10);
+  const id = req.params.id.toString();
 
   // id til að birta notanda, notum xss library til að koma í veg fyrir xss
   const displayId = xss(req.params.id);
 
-  if (isNaN(id) || id <= 0) {
-    res.send(`<p>${displayId} er ekki gilt</p>`)
-  }
+  //if (isNaN(id) || id <= 0) {
+  //  res.send(`<p>${displayId} er ekki gilt</p>`)
+  //}
 
-  db.one(`SELECT * FROM data WHERE id = $1`, [id])
+  db.one(`SELECT * FROM images WHERE id = $1`, [id])
     .then(data => {
       res.send(`<dl>
   <dt>Nafn</dt>
@@ -72,12 +79,28 @@ router.get('/add', (req, res) => {
   res.send(`
 <form method="post" action="/add">
   <div>
-    <label for="name">Nafn:</label>
-    <input type="text" name="name" id="name">
+    <label for="GPSLatitude">GPSLatitude:</label>
+    <input type="text" name="GPSLatitude" id="GPSLatitude">
   </div>
   <div>
-    <label for="data">Gögn:</label>
-    <textarea name="data" id="data"></textarea>
+    <label for="GPSLatitudeRef">GPSLatitudeRef:</label>
+    <textarea name="GPSLatitudeRef" id="GPSLatitudeRef"></textarea>
+  </div>
+  <div>
+    <label for="GPSLongtitude">GPSLongtitude:</label>
+    <textarea name="GPSLongtitude" id="GPSLongtitude"></textarea>
+  </div>
+  <div>
+    <label for="GPSLongtitudeRef">GPSLongtitudeRef:</label>
+    <textarea name="GPSLongtitudeRef" id="GPSLongtitudeRef"></textarea>
+  </div>
+  <div>
+    <label for="comment">comment:</label>
+    <textarea name="comment" id="comment"></textarea>
+  </div>
+  <div>
+    <label for="imageServerName">imageServerName:</label>
+    <textarea name="imageServerName" id="imageServerName"></textarea>
   </div>
   <button>Skrá</button>
 </form>
@@ -86,10 +109,14 @@ router.get('/add', (req, res) => {
 
 // POST item to database
 router.post('/add', (req, res) => {
-  const name = xss(req.body.name || '');
-  const data = xss(req.body.data || '');
+  const GPSLongtitude = xss(req.body.GPSLongtitude || '');
+  const GPSLongtitudeRef = xss(req.body.GPSLongtitudeRef || '');
+  const GPSLatitude = xss(req.body.GPSLatitude || '');
+  const GPSLatitudeRef = xss(req.body.GPSLatitudeRef || '');
+  const comment = xss(req.body.comment || '');
+  const imageServerName = xss(req.body.imageServerName || '');
 
-  db.none(`INSERT INTO data (name, data) VALUES ($1, $2)`, [name, data])
+  db.none(`INSERT INTO images (GPSLatitude, GPSLatitudeRef, GPSLongtitude, GPSLongtitudeRef, comment, imageServerName) VALUES ($1, $2, $3, $4, $5, $6)`, [GPSLongtitude, GPSLongtitudeRef, GPSLatitude, GPSLatitudeRef, comment, imageServerName])
     .then(data => {
       res.send('<p>Gögnum bætt við!</p>');
     })
@@ -106,8 +133,16 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
   exif.getExifData(destination, fileNameOnServer, (result) => {
-    console.log('EXIF DATA:\n' + result);
+    console.log('EXIF DATA:\n' + result.gps.GPSLatitude);
     console.log('IMAGE\n' + result.image.Make);
+
+    db.none(`INSERT INTO data (name, data) VALUES ($1, $2)`, [Date.now(), result.gps.GPSLatitude])
+    .then(data => {
+      res.send('<p>Gögnum bætt við!</p>');
+    })
+    .catch(error => {
+      res.send(`<p>Gat ekki bætt gögnum við: ${error}</p>`);
+    });
     res.render('index_kort');
   }, (error) => {
     console.log(error);
