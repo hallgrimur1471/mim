@@ -19,7 +19,7 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
@@ -28,7 +28,7 @@
     display: block;
     width: 80%;
     max-width: 700px;
-    max-height: 700px;
+    max-height: 500px;
     opacity: 1.0;
 
 }

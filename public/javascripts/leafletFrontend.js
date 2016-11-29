@@ -72,4 +72,9 @@ function onDoubleClick(e) {
   }
 }
 }
-  
+
+var helloPopup = L.popup().setContent('hello world');
+
+L.easyButton('<img src="/Button.png">', function(btn, mymap){
+    helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
+}).addTo(mymap);
