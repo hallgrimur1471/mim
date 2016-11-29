@@ -1,15 +1,16 @@
 //var mymap = L.map('mapid').setView([64.127, -21.817], 13);
 var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-  maxZoom: 18
+  maxZoom: 17
 });
-var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+  maxZoom: 17
 });
 
 var mymap = L.map('mapid', {
   layers: [Esri_WorldImagery] // only add one!
-}).setView([64.127, -21.817], 13);
+}).setView([64.127, -21.817], 12);
 
 var baseLayers = {
 	"street map": basemap0,
@@ -118,28 +119,35 @@ function displayMarkers() {
   // method that we will use to update the control based on feature properties passed
   info.update = function (props) {
     this._div.innerHTML = '<h1>Import image</h1>'
-    +'<p>Welcome to the Import image page!</p>'
-    +'<form method="POST" action="/" enctype="multipart/form-data">'
-    +'<p></p>'
-    +'<label for="image_title">New image title: </label>'
-    +'<input id="image_title" type="text" name="title" placeholder="title">'
-    +'<p></p>'
-    +'<label for="image_import">Import image: </label>'
-    +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
-    +'<p></p>'
-    +'<button class="btn btn-primary" type="submit">Submit'
-    +'</button></form>';
+                          +'<p>Welcome to the Import image page!</p>'
+                          +'<span class="close" onclick="info.remove()">&times;</span>'
+                          +'<form method="POST" action="/" enctype="multipart/form-data">'
+                          +'<p></p>'
+                          +'<label for="image_title">New image title: </label>'
+                          +'<input id="image_title" type="text" name="title" placeholder="title">'
+                          +'<p></p>'
+                          +'<label for="image_import">Import image: </label>'
+                          +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
+                          +'<p></p>'
+                          +'<button class="btn btn-primary" type="submit">Submit'
+                          +'</button>'
+                          +'</form>';
   //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
   //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
   //      : 'Hover over a state');
 
+
   };
+
+  L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
+  //mymap.addControl(info);
 
   // Get the <span> element that closes the modal
 
-  L.easyButton('<img alt="do this" src=/Button.png>', function(){mymap.addControl(info)}).addTo(mymap);
-  //mymap.addControl(info);
 
+  L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
+    mymap.setView([65.0082419, -18.8962449], 7);
+  }).addTo(mymap);
 
 
 
@@ -166,15 +174,18 @@ function displayMarkers() {
   }
 
 
-  var helloPopup = L.popup().setContent();
-
-  L.easyButton('<img src="/Button.png">', function(mymap){
-  //  helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
-  info.hide();
-
-    //info.addTo(mymap);
-  }).addTo(mymap);
-
-
   
 }
+
+/*
+
+var helloPopup = L.popup().setContent();
+
+L.easyButton('<img src="/Button.png">', function(mymap){
+//  helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
+  info.remove();
+
+  //info.addTo(mymap);
+}).addTo(mymap);
+
+*/
