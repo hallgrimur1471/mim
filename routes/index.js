@@ -35,7 +35,7 @@ router.get('/list', (req, res) => {
       data.forEach(row => {
         console.log('ROW: ' + Object.keys(row));
         console.log('ROW.imageservername: ' + row.imageservername.toString());
-        console.log('ROW.imageServerName: ' + row.imageServerName);
+        console.log('ROW.imageservername: ' + row.imageservername);
         result.push(`<li><a href="/list/${row.imageservername.toString()}">${row.imageservername.toString()}</a></li>`);
       })
       result.push('</ul>');
@@ -79,28 +79,28 @@ router.get('/add', (req, res) => {
   res.send(`
 <form method="post" action="/add">
   <div>
-    <label for="GPSLatitude">GPSLatitude:</label>
-    <input type="text" name="GPSLatitude" id="GPSLatitude">
+    <label for="gpslatitude">gpslatitude:</label>
+    <input type="text" name="gpslatitude" id="gpslatitude">
   </div>
   <div>
-    <label for="GPSLatitudeRef">GPSLatitudeRef:</label>
-    <textarea name="GPSLatitudeRef" id="GPSLatitudeRef"></textarea>
+    <label for="gpslatituderef">gpslatituderef:</label>
+    <textarea name="gpslatituderef" id="gpslatituderef"></textarea>
   </div>
   <div>
-    <label for="GPSLongtitude">GPSLongtitude:</label>
-    <textarea name="GPSLongtitude" id="GPSLongtitude"></textarea>
+    <label for="gpslongtitude">gpslongtitude:</label>
+    <textarea name="gpslongtitude" id="gpslongtitude"></textarea>
   </div>
   <div>
-    <label for="GPSLongtitudeRef">GPSLongtitudeRef:</label>
-    <textarea name="GPSLongtitudeRef" id="GPSLongtitudeRef"></textarea>
+    <label for="gpslongtituderef">gpslongtituderef:</label>
+    <textarea name="gpslongtituderef" id="gpslongtituderef"></textarea>
   </div>
   <div>
     <label for="comment">comment:</label>
     <textarea name="comment" id="comment"></textarea>
   </div>
   <div>
-    <label for="imageServerName">imageServerName:</label>
-    <textarea name="imageServerName" id="imageServerName"></textarea>
+    <label for="imageservername">imageservername:</label>
+    <textarea name="imageservername" id="imageservername"></textarea>
   </div>
   <button>Skrá</button>
 </form>
@@ -109,14 +109,14 @@ router.get('/add', (req, res) => {
 
 // POST item to database
 router.post('/add', (req, res) => {
-  const GPSLongtitude = xss(req.body.GPSLongtitude || '');
-  const GPSLongtitudeRef = xss(req.body.GPSLongtitudeRef || '');
-  const GPSLatitude = xss(req.body.GPSLatitude || '');
-  const GPSLatitudeRef = xss(req.body.GPSLatitudeRef || '');
+  const gpslongtitude = xss(req.body.gpslongtitude || '');
+  const gpslongtituderef = xss(req.body.gpslongtituderef || '');
+  const gpslatitude = xss(req.body.gpslatitude || '');
+  const gpslatituderef = xss(req.body.gpslatituderef || '');
   const comment = xss(req.body.comment || '');
-  const imageServerName = xss(req.body.imageServerName || '');
+  const imageservername = xss(req.body.imageservername || '');
 
-  db.none(`INSERT INTO images (GPSLatitude, GPSLatitudeRef, GPSLongtitude, GPSLongtitudeRef, comment, imageServerName) VALUES ($1, $2, $3, $4, $5, $6)`, [GPSLongtitude, GPSLongtitudeRef, GPSLatitude, GPSLatitudeRef, comment, imageServerName])
+  db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername) VALUES ($1, $2, $3, $4, $5, $6)`, [gpslongtitude, gpslongtituderef, gpslatitude, gpslatituderef, comment, imageservername])
     .then(data => {
       res.send('<p>Gögnum bætt við!</p>');
     })
@@ -133,17 +133,18 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
   exif.getExifData(destination, fileNameOnServer, (result) => {
-    console.log('EXIF DATA:\n' + result.gps.GPSLatitude);
+    console.log('EXIF DATA:\n' + result.gps.gpslatitude);
     console.log('IMAGE\n' + result.image.Make);
 
-    db.none(`INSERT INTO data (name, data) VALUES ($1, $2)`, [Date.now(), result.gps.GPSLatitude])
+    db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername) VALUES ($1, $2, $3, $4, $5, $6)`, [gpslongtitude, gpslongtituderef, gpslatitude, gpslatituderef, comment, imageservername])
     .then(data => {
-      res.send('<p>Gögnum bætt við!</p>');
+      console.log('<p>Gögnum bætt við!</p>');
+      res.render('index_kort');
     })
     .catch(error => {
-      res.send(`<p>Gat ekki bætt gögnum við: ${error}</p>`);
+      console.log(`<p>Gat ekki bætt gögnum við: ${error}</p>`);
+      res.render('index_kort');
     });
-    res.render('index_kort');
   }, (error) => {
     console.log(error);
     res.render('error', {
