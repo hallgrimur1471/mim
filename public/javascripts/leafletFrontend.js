@@ -1,4 +1,3 @@
-//var mymap = L.map('mapid').setView([64.127, -21.817], 13);
 var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
   maxZoom: 17
@@ -18,14 +17,10 @@ var baseLayers = {
 };
 
 L.control.layers(baseLayers).addTo(mymap);
-
-L.easyButton( 'glyphicon glyphicon-question-sign', function(){
-  $("#modalPopup").modal('show');
-}).addTo(mymap);
-
-var data = [];
 /*
-*$.ajax({url: "/api/getMarkers", success: function(results) {
+var data = [];
+
+$.ajax({url: "/api/getMarkers", success: function(results) {
   console.log('RESULTS:\n' + results);
 
   results = JSON.parse(results);
@@ -69,9 +64,6 @@ function convertDMSToDD(degrees, minutes, seconds, direction) {
     return dd;
 }
 
-//$.get( '/searching',parameters, function(data) {
-//       $('#results').html(data);
-
 function displayMarkers() {
 
   console.log('DATA: \n' + data);
@@ -100,7 +92,8 @@ function displayMarkers() {
 
   // method that we will use to update the control based on feature properties passed
   info.update = function (props) {
-    this._div.innerHTML = '<h1>Import image</h1>'
+
+    this._div.innerHTML =   '<h1>Import image</h1>'
                           +'<p>Welcome to the Import image page!</p>'
                           +'<span class="close" onclick="info.remove()">&times;</span>'
                           +'<form method="POST" action="/" enctype="multipart/form-data">'
@@ -108,26 +101,23 @@ function displayMarkers() {
                           +'<label for="image_title">New image title: </label>'
                           +'<input id="image_title" type="text" name="title" placeholder="title">'
                           +'<p></p>'
+                          +'<label for="image_comment">comment: </label>'
+                          +'<input id="image_comment" type="text" name="comment" placeholder="comment">'
+                          +'<p></p>'
                           +'<label for="image_import">Import image: </label>'
                           +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
                           +'<p></p>'
                           +'<button class="btn btn-primary" type="submit">Submit'
                           +'</button>'
                           +'</form>';
-  //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-  //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-  //      : 'Hover over a state');
-
 
   };
 
-
-
-
   L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
-  //mymap.addControl(info);
 
-  // Get the <span> element that closes the modal
+  L.easyButton( 'glyphicon glyphicon-question-sign', function(){
+    $("#modalPopup").modal('show');
+  }).addTo(mymap);
 
   L.easyButton( 'glyphicon glyphicon-globe', function(){
     mymap.setView([35.0082419, -18.8962449], 2);
@@ -136,6 +126,7 @@ function displayMarkers() {
   L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
     mymap.setView([65.0082419, -18.8962449], 7);
   }).addTo(mymap);
+
 
   function onClick(e) {
     var modal = document.getElementById('myModal');
@@ -162,19 +153,3 @@ function displayMarkers() {
       $('#modalPopup').modal('show');
 
   });
-
-
-
-
-/*
-
-var helloPopup = L.popup().setContent();
-
-L.easyButton('<img src="/Button.png">', function(mymap){
-//  helloPopup.setLatLng(mymap.getCenter()).openOn(mymap);
-  info.remove();
-
-  //info.addTo(mymap);
-}).addTo(mymap);
-
-*/
