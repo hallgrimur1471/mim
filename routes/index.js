@@ -25,6 +25,11 @@ router.get('/', function(req, res, next) {
   res.render('index_kort');
 });
 
+/* GET page after image import (front-end notices changed url). */
+router.get('/import', function(req, res, next) {
+  res.render('index_kort');
+});
+
 /* GET marker data. */
 router.get('/api/getMarkers', function(req, res, next) {
 
@@ -52,7 +57,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   imageprocess.processImage(destination, fileNameOnServer, db)
   .then(data => {
     console.log('image processed!');
-    res.redirect('/');
+    res.redirect('/import');
   })
   .catch(error => {
     console.log('did not manage to process image');
