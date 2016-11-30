@@ -1,2 +1,4 @@
 node_modules/
 public/images
+examples/imgurExample/routes/clientID.txt
+examples/imgurExample/routes/clientSecret.txt
