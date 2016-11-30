@@ -12,9 +12,15 @@ var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/
   maxZoom: 17
 });
 
+
 var mymap = L.map('mapid', {
   layers: [Esri_WorldImagery] // only add one!
 }).setView([64.127, -21.817], 12);
+
+var baseLayers = {
+  "street map": basemap0,
+  "satellite map": Esri_WorldImagery
+};
 
 L.control.layers(baseLayers).addTo(mymap);
 ```
