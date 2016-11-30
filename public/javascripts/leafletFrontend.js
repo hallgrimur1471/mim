@@ -19,13 +19,9 @@ var baseLayers = {
 
 L.control.layers(baseLayers).addTo(mymap);
 
-
-
-  L.easyButton( 'glyphicon glyphicon-question-sign', function(){
-    $("#modalPopup").modal('show');
-  }).addTo(mymap);
-//var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
-//[64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
+L.easyButton( 'glyphicon glyphicon-question-sign', function(){
+  $("#modalPopup").modal('show');
+}).addTo(mymap);
 
 var data = [];
 /*
@@ -83,7 +79,7 @@ function displayMarkers() {
   for (var i = 0; i < data.length; i++) {
     marker = new L.marker([data[i][0],data[i][1]])
     .bindPopup('<img style="width:100%"  id="image"+ i alt="'+ data[i][2] +'" src="/'+ data[i][3] +'" ><br>' + data[i][2], {minWidth:100})
-    .addTo(mymap).on('dblclick', onDoubleClick);
+    .addTo(mymap).on('click', onClick);
     marker.on('mouseover', function (e) {
       this.openPopup();
     });
@@ -141,7 +137,7 @@ function displayMarkers() {
     mymap.setView([65.0082419, -18.8962449], 7);
   }).addTo(mymap);
 
-  function onDoubleClick(e) {
+  function onClick(e) {
     var modal = document.getElementById('myModal');
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -161,6 +157,11 @@ function displayMarkers() {
     }
   }
 
+  $(document).ready(function () {
+
+      $('#modalPopup').modal('show');
+
+  });
 
 
 
