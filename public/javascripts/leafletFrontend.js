@@ -122,8 +122,6 @@ function displayMarkers() {
 
   L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
   //mymap.addControl(info);
-  L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
-  //mymap.addControl(info);
 
   // Get the <span> element that closes the modal
 
