@@ -163,7 +163,7 @@ router.post('/add', (req, res) => {
 router.post('/', upload.single('myFile'), function(req, res, next) {
   console.log(req.body);
   console.log(req.file);
-  console.log('SERVER FILE NAME\n' + req.file.filename)
+  console.log('SERVER FILE NAME\n' + req.file.filename);
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
   exif.getExifData(destination, fileNameOnServer, (result) => {

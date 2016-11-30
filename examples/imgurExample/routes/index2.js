@@ -18,6 +18,9 @@ router.get('/', function(req, res, next) {
 
   //console.log('STARTING UPLOAD...');
   //imgur.upload('public/images/japan.jpg', function (err, res) {
+  //  if (err) {
+  //    return console.log(err);
+  //  }
   //  console.log('RES.DATA \n' + JSON.stringify(res.data));
   //  console.log('RES.DATA.LINK \n' + res.data.link); // Log the imgur url 
   //});
@@ -30,17 +33,20 @@ router.get('/', function(req, res, next) {
         //  console.log(JSON.stringify(res.data));
         //});
    
-  //imgur.update({
-  //  id: 'W0JfyHW',
-  //  title: 'My Title',
-  //  description: 'My Description'
-  //}, function (err,res) {
-  //  console.log(res.data);
-  //});
+  imgur.update({
+    id: 'JuHonC5sBgCrzdr',
+    title: 'New Title',
+    description: 'New Description'
+  }, function (err,res) {
+    console.log('UPDATE: \n' + JSON.stringify(res.data));
+  });
    
-        //imgur.getCredits(function (err, res) {
-        //  console.log('IMGUR.GETCREDITS \n' + JSON.stringify(res.data));
-        //});
+  imgur.getCredits(function (err, res) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('IMGUR.GETCREDITS \n' + JSON.stringify(res.data));
+  });
 
   res.render('index', { title: 'Express' });
 });
