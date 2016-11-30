@@ -19,12 +19,17 @@ var baseLayers = {
 
 L.control.layers(baseLayers).addTo(mymap);
 
+
+
+  L.easyButton( 'glyphicon glyphicon-question-sign', function(){
+    $("#modalPopup").modal('show');
+  }).addTo(mymap);
 //var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
 //[64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
 
 var data = [];
-
-$.ajax({url: "/api/getMarkers", success: function(results) {
+/*
+*$.ajax({url: "/api/getMarkers", success: function(results) {
   console.log('RESULTS:\n' + results);
 
   results = JSON.parse(results);
@@ -88,7 +93,7 @@ function displayMarkers() {
 
 
   }
-
+*/
   var info = L.control();
 
   info.onAdd = function (map) {
@@ -120,25 +125,21 @@ function displayMarkers() {
 
   };
 
-  L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
-  //mymap.addControl(info);
+
+
+
   L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
   //mymap.addControl(info);
 
   // Get the <span> element that closes the modal
 
-L.easyButton( 'glyphicon glyphicon-globe', function(){
-  mymap.setView([35.0082419, -18.8962449], 2);
-}).addTo(mymap);
-
+  L.easyButton( 'glyphicon glyphicon-globe', function(){
+    mymap.setView([35.0082419, -18.8962449], 2);
+  }).addTo(mymap);
 
   L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
     mymap.setView([65.0082419, -18.8962449], 7);
   }).addTo(mymap);
-
-
-
-
 
   function onDoubleClick(e) {
     var modal = document.getElementById('myModal');
@@ -162,7 +163,7 @@ L.easyButton( 'glyphicon glyphicon-globe', function(){
 
 
 
-}
+
 
 /*
 

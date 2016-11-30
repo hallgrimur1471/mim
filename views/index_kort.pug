@@ -5,5 +5,20 @@ block content
   #myModal.modal
    img#img01.modal-content
    #caption
+  #modalPopup.modal.fade
+    .modal-dialog
+     .modal-content
+      .modal-header
+       button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+       h4.modal-title Subscribe our Newsletter
+      .modal-body
+       p Subscribe to our mailing list to get the latest updates straight in your inbox.
+       form
+        .form-group
+         input.form-control(type='text', placeholder='Name')
+        .form-group
+         input.form-control(type='email', placeholder='Email Address')
+        button.btn.btn-primary(type='submit') Subscribe
+
 
   script(src='javascripts/leafletFrontend.js')
