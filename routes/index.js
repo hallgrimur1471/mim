@@ -208,7 +208,8 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
             [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, result.image.Make, ires.data.link, fileNameOnServer, ires.data.deletehash])
         .then(data => {
           console.log('<p>Gögnum bætt við!</p>');
-          res.render('index_kort');
+          res.redirect('/');
+          //res.render('index_kort');
         })
         .catch(error => {
           console.log(`<p>Gat ekki bætt gögnum við: ${error}</p>`);
