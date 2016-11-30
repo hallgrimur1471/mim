@@ -42,10 +42,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
 This is a school project in web developing. It was developed in github and deployed in "<a href="http://mapim.herokuapp.com/">Heroku</a> ==$0" in 2016.
 
 
-//A short description of the motivation behind the creation and maintenance of the project. This should explain why the project exists.
-
 ##Installation and setup
-
 
 
 1. [Download and install Node](http://nodejs.org)
@@ -55,10 +52,8 @@ This is a school project in web developing. It was developed in github and deplo
 2. Download and unzipp from github.
 then from the mim rootfolder type:
 
-... npm install
-... npm start
-
-Provide code examples and explanations of how to get the project.
+...npm install
+...npm start
 
 
 ##Getting involved
