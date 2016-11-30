@@ -3,7 +3,7 @@ var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
   attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
   maxZoom: 17
 });
-  var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
   maxZoom: 17
 });
@@ -13,25 +13,14 @@ var mymap = L.map('mapid', {
 }).setView([64.127, -21.817], 12);
 
 var baseLayers = {
-	"street map": basemap0,
-	"satellite map": Esri_WorldImagery
+  "street map": basemap0,
+  "satellite map": Esri_WorldImagery
 };
-
 
 L.control.layers(baseLayers).addTo(mymap);
 
-
 //var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
 //[64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
-
-//$.ajax({
-//    url: "api/getMarkers",
-//    context: document.body,
-//    success: function(results){
-//      console.log('RESULTS:\n' + results);
-//      //$(this).addClass("done");
-//    }
-//});
 
 var data = [];
 
@@ -67,7 +56,6 @@ $.ajax({url: "/api/getMarkers", success: function(results) {
 
   displayMarkers();
 }});
-
 
 function convertDMSToDD(degrees, minutes, seconds, direction) {
     var dd = degrees + minutes/60 + seconds/(60*60);
@@ -136,6 +124,10 @@ function displayMarkers() {
   //mymap.addControl(info);
 
   // Get the <span> element that closes the modal
+
+L.easyButton( 'glyphicon glyphicon-globe', function(){
+  mymap.setView([35.0082419, -18.8962449], 2);
+}).addTo(mymap);
 
 
   L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
