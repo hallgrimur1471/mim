@@ -15,7 +15,7 @@ function getExifData(destination, fileNameOnServer, callback, error) {
   try {
     const imagePath = destination + fileNameOnServer;
     console.log('IMAGEPATH:\n' + imagePath);
-    new ExifImage({ image : imagePath }, function (error, exifData) {
+    new ExifImage({ image : imagePath }, function exifResponse(error, exifData) {
       if (error)
         error('Error: '+error.message);
       else
@@ -25,6 +25,8 @@ function getExifData(destination, fileNameOnServer, callback, error) {
     error('Error: ' + error.message);
   }
 }
+
+
 
 module.exports = {
   getExifData
