@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer'); // used for uploading files
-const iprocess = require('./imageProcess.js');
+const imageprocess = require('./imageProcess.js');
 const pgp = require('pg-promise')();
 const xss = require('xss');
 
@@ -49,7 +49,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
 
-  iprocess.processImage(destination, fileNameOnServer, db)
+  imageprocess.processImage(destination, fileNameOnServer, db)
   .then(data => {
     console.log('image processed!');
     res.redirect('/');

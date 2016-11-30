@@ -23,7 +23,7 @@ function processImage(destination, fileNameOnServer, db) {
         if (err) {
           reject(error);
         }
-        imgur.setClientID(data);
+        imgur.setClientID(process.env.IMGUR_CLIENT_ID || data);
 
         console.log('STARTING UPLOAD...');
         imgur.upload(destination + fileNameOnServer, function uploadResponse(err, ires) {

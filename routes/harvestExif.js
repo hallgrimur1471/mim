@@ -19,7 +19,7 @@ function getExifData(destination, fileNameOnServer, callback, error) {
       if (error)
         error('Error: '+error.message);
       else
-        callback(exifData); // Do something with your data!
+        callback(exifData);
     });
   } catch (error) {
     error('Error: ' + error.message);
