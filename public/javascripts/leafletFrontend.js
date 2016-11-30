@@ -51,7 +51,11 @@ $.ajax({url: "/api/getMarkers", success: function(results) {
     //console.log('ARRAY: \n' + '[' + gpslatitude.substring(2,gpslatitude.length-2) + ']');
     //console.log('ROW.GPSLATITUDE: \n' + JSON.stringify(JSON.parse(row.gpslatitude)[0]));
     //data.push(`<li><a href="/list/${row.imageservername.toString()}">${row.imageservername.toString()}</a></li>`);
-    data.push([parseFloat(latcalc), parseFloat(longcalc), (row.comment || 'no comment'), 'images/' + row.imageservername]);
+
+    console.log('ROW.COMMENT \n' + row.comment);
+    console.log('ROW.imageservername \n' + row.imageservername);
+
+    data.push([parseFloat(latcalc), parseFloat(longcalc), (row.comment || 'no comment'), row.imageservername]);
   })
 
   displayMarkers();
@@ -77,7 +81,7 @@ function displayMarkers() {
 
   for (var i = 0; i < data.length; i++) {
     marker = new L.marker([data[i][0],data[i][1]])
-    .bindPopup('<img style="width:100%"  id="image"+ i alt="'+ data[i][2] +'" src="/'+ data[i][3] +'" ><br>' + data[i][2], {minWidth:100})
+    .bindPopup('<img style="width:100%"  id="image"+ i alt="'+ data[i][2] +'" src="'+ data[i][3] +'" ><br>' + data[i][2], {minWidth:100})
     .addTo(mymap).on('dblclick', onDoubleClick);
     marker.on('mouseover', function (e) {
       this.openPopup();
