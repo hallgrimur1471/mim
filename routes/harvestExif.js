@@ -26,8 +26,6 @@ function getExifData(destination, fileNameOnServer, callback, error) {
   }
 }
 
-
-
 module.exports = {
   getExifData
 }

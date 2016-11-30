@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 function processImage(destination, fileNameOnServer, db) {
-  var p1 = new Promise(
+  var promise = new Promise(
     function(resolve, reject) {
       console.log('promise started!\n');
       exif.getExifData(destination, fileNameOnServer, function exifDataResponse(result) {
@@ -22,7 +22,6 @@ function processImage(destination, fileNameOnServer, db) {
         const clientID = fs.readFile(clientIDPath, 'utf8', function clientIDResponse(err, data) {
         if (err) {
           reject(error);
-          //return console.log(err);
         }
         imgur.setClientID(data);
 
@@ -30,7 +29,6 @@ function processImage(destination, fileNameOnServer, db) {
         imgur.upload(destination + fileNameOnServer, function uploadResponse(err, ires) {
           if (err) {
             reject(error);
-            //return console.log(err);
           }
 
           console.log('ires.DATA \n' + JSON.stringify(ires.data));
@@ -55,15 +53,11 @@ function processImage(destination, fileNameOnServer, db) {
         });
       });
       }, (error) => {
-          console.log(error);
-          res.render('error', {
-            title: 'Oh no!',
-            message: 'An unexpected error occured when making your request, '
-                   + 'perhaps you can try again later.' });
-        });
+        reject(error);
+      });
     }
   );
-  return p1;
+  return promise;
 }
 
 module.exports = {
