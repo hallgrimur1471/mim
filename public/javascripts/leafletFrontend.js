@@ -21,13 +21,6 @@ var baseLayers = {
 L.control.layers(baseLayers).addTo(mymap);
 
 
-var mynd = L.icon({
-  iconUrl: src="geotagged_photo_from_nexus.jpg",
-    icony:     [400, 400], // size of the icon
-    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
-  });
-
 //var data = [[64.127, -21.817, 'Thetta er mynd af einhverju', 'thumbnail.png'],[64.117, -21.807, 'Thetta er onnur mynd af einhverju', 'geotagged_photo_from_nexus.jpg'],
 //[64.100, -21.707, 'Thetta er thridja mynd af einhverju', 'DSC09107_geotag.jpg']];
 
