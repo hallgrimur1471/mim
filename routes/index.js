@@ -54,7 +54,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
 
-  imageprocess.processImage(destination, fileNameOnServer, db)
+  imageprocess.processImage(destination, fileNameOnServer, req.body.comment, db)
   .then(data => {
     console.log('image processed!');
     res.redirect('/import');

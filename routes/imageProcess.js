@@ -4,7 +4,7 @@ const imgur = require('imgur-node-api');
 const path = require('path');
 const fs = require('fs');
 
-function processImage(destination, fileNameOnServer, db) {
+function processImage(destination, fileNameOnServer, comment, db) {
   var promise = new Promise(
     function(resolve, reject) {
       console.log('promise started!\n');
@@ -43,7 +43,7 @@ function processImage(destination, fileNameOnServer, db) {
           console.log('ADD 8 \n' + ires.data.deletehash);
 
           db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername, originalname, deletehash) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-              [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, result.image.Make, ires.data.link, fileNameOnServer, ires.data.deletehash])
+              [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, comment, ires.data.link, fileNameOnServer, ires.data.deletehash])
           .then(data => {
             resolve(data);
           })
