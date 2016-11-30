@@ -92,79 +92,79 @@ function displayMarkers() {
 
 
   }
+}
 
-  var info = L.control();
+var info = L.control();
 
-  info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-  };
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+  this.update();
+  return this._div;
+};
 
-  // method that we will use to update the control based on feature properties passed
-  info.update = function (props) {
-    this._div.innerHTML = '<h1>Import image</h1>'
-                          +'<p>Welcome to the Import image page!</p>'
-                          +'<span class="close" onclick="info.remove()">&times;</span>'
-                          +'<form method="POST" action="/" enctype="multipart/form-data">'
-                          +'<p></p>'
-                          +'<label for="image_title">New image title: </label>'
-                          +'<input id="image_title" type="text" name="title" placeholder="title">'
-                          +'<p></p>'
-                          +'<label for="image_import">Import image: </label>'
-                          +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
-                          +'<p></p>'
-                          +'<button class="btn btn-primary" type="submit">Submit'
-                          +'</button>'
-                          +'</form>';
-  //  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-  //      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-  //      : 'Hover over a state');
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+  this._div.innerHTML = '<h1>Import image</h1>'
+                        +'<p>Welcome to the Import image page!</p>'
+                        +'<span class="close" onclick="info.remove()">&times;</span>'
+                        +'<form method="POST" action="/" enctype="multipart/form-data">'
+                        +'<p></p>'
+                        +'<label for="image_title">New image title: </label>'
+                        +'<input id="image_title" type="text" name="title" placeholder="title">'
+                        +'<p></p>'
+                        +'<label for="image_import">Import image: </label>'
+                        +'<input id="image_import" type="file" name="myFile" accept=".jpg">'
+                        +'<p></p>'
+                        +'<button class="btn btn-primary" type="submit">Submit'
+                        +'</button>'
+                        +'</form>';
+//  this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
+//      '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
+//      : 'Hover over a state');
 
 
-  };
+};
 
-  L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
-  //mymap.addControl(info);
+L.easyButton( 'glyphicon glyphicon-upload', function(){mymap.addControl(info)}).addTo(mymap);
+//mymap.addControl(info);
 
-  // Get the <span> element that closes the modal
+// Get the <span> element that closes the modal
 
 L.easyButton( 'glyphicon glyphicon-globe', function(){
-  mymap.setView([35.0082419, -18.8962449], 2);
+mymap.setView([35.0082419, -18.8962449], 2);
 }).addTo(mymap);
 
 
-  L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
-    mymap.setView([65.0082419, -18.8962449], 7);
-  }).addTo(mymap);
+L.easyButton( 'glyphicon glyphicon-zoom-out', function(){
+  mymap.setView([65.0082419, -18.8962449], 7);
+}).addTo(mymap);
 
 
 
 
 
-  function onDoubleClick(e) {
-    var modal = document.getElementById('myModal');
+function onDoubleClick(e) {
+  var modal = document.getElementById('myModal');
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById('image');
-    var modalImg = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
+  // Get the image and insert it inside the modal - use its "alt" text as a caption
+  var img = document.getElementById('image');
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
 
-    modal.style.display = "block";
-    modal.style.zIndex = 1000;
-    modalImg.src = img.src;
-    captionText.innerHTML = img.alt;
+  modal.style.display = "block";
+  modal.style.zIndex = 1000;
+  modalImg.src = img.src;
+  captionText.innerHTML = img.alt;
 
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
   }
-
-
-
 }
+
+
+
 
 /*
 
