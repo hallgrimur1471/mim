@@ -45,7 +45,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
 
 ##Motivation
 
-This is a school project in web developing. It was developed in github and deployed in "<a href="http://mapim.herokuapp.com/">Heroku</a> ==$0" in 2016.
+This is a school project in web developing. It was developed in github and deployed in heroku and can be view here "<a href="http://mapim.herokuapp.com/">Heroku</a>" in 2016.
 
 
 ##Installation and setup
@@ -53,13 +53,13 @@ This is a school project in web developing. It was developed in github and deplo
 
 1. [Download and install Node](http://nodejs.org)
 
-2. This project reguires a postgres database, see in line 8 in index.js
+2. This project reguires a postgres database, see line 8 in index.js
 
 2. Download and unzipp from github.
 then from the mim rootfolder type:
 
-...npm install
-...npm start
+⋅⋅⋅npm install
+⋅⋅⋅npm start
 
 
 ##Getting involved
