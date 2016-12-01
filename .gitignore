@@ -2,4 +2,6 @@ node_modules/
 examples/exifExample/uploads/
 examples/imgurExample/routes/clientID.txt
 examples/imgurExample/routes/clientSecret.txt
+routes/clientID.txt
+routes/newDatabaseScheme.txt
 npm-debug.log
