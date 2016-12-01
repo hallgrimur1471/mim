@@ -58,6 +58,13 @@ router.post('/', upload.single('myFile'), (req, res, next) => {
     res.redirect('/import');
   })
   .catch((error) => {
+    console.log('!ERROR!: ' + error);
+    if( error === 'Error: No Exif segment found in the given image.' ) {
+      res.render('error', {
+      title: 'No GPS data',
+      message: 'The image you tried to import does not contain GPS EXIF data, '
+             + 'you have to import an image that is geotagged.' });
+    }
     displayUserErrorMessage(res);
   });
 });

@@ -23,6 +23,10 @@ function processImage(destination, fileNameOnServer, comment, db) {
               reject(uerr);
             }
 
+            if (!gps.GPSLatitude || !gps.GPSLatitudeRef || !gps.GPSLongitude || !gps.GPSLongitudeRef) {
+              reject('no exif data');
+            }
+
             db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername, originalname, deletehash) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
               [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, comment, ires.data.link, fileNameOnServer, ires.data.deletehash])
           .then((dbdata) => {
