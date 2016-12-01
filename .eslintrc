@@ -8,7 +8,10 @@
     "no-unused-vars": ["error", { "args": "none" }],
     "new-cap": ["error", { "capIsNew": false }],
     "indent": ["error", 2],
-    "quotes": 0
+    "quotes": 0,
+    "param-reassign": 0,
+    "no-param-reassign": 0,
+    "props": 0
   },
   "env": {
     "browser": true,
