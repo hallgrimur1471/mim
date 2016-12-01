@@ -9,6 +9,7 @@ const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@loc
 const db = pgp(DATABASE);
 
 // location to temporarily store images before imgur upload
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/images/');
