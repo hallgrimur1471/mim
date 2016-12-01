@@ -11,6 +11,9 @@
     "no-unused-vars": ["error", { "args": "none" }],
     "new-cap": ["error", { "capIsNew": false }],
     "indent": ["error", 2],
+    "quotes": 0,
+    "key-spacing": 0,
+    "object-shorthand": 0,
   },
   "env": {
     "browser": true,

@@ -2,23 +2,23 @@ const express = require('express');
 const multer = require('multer'); // used for uploading files
 const imageprocess = require('./imageProcess.js');
 const pgp = require('pg-promise')();
-const xss = require('xss');
 
 const router = express.Router();
-const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@localhost/mimdb2';
+const DATABASE = process.env.DATABASE_URL ||
+  'postgres://hallgrimur1471:pass@localhost/mimdb2';
 const db = pgp(DATABASE);
 
 // location to temporarily store images before imgur upload
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
+  destination: (req, file, cb) => {
     cb(null, 'public/images/');
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
 });
 
-const upload = multer({ storage:storage });
+const upload = multer({ storage: storage });
 
 function displayUserErrorMessage(res) {
   res.render('error', {
@@ -49,21 +49,15 @@ router.get('/api/getMarkers', (req, res, next) => {
 });
 
 /* POST image. */
-router.post('/', upload.single('myFile'), function(req, res, next) {
-  console.log(req.body);
-  console.log(req.file);
-  console.log('SERVER FILE NAME\n' + req.file.filename);
-
+router.post('/', upload.single('myFile'), (req, res, next) => {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
 
   imageprocess.processImage(destination, fileNameOnServer, req.body.comment, db)
-  .then(data => {
-    console.log('image processed!');
+  .then((data) => {
     res.redirect('/import');
   })
-  .catch(error => {
-    console.log('did not manage to process image');
+  .catch((error) => {
     displayUserErrorMessage();
   });
 });
