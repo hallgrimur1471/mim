@@ -18,16 +18,16 @@ function processImage(destination, fileNameOnServer, comment, db) {
 
           if (!gps.GPSLatitude || !gps.GPSLatitudeRef || !gps.GPSLongitude || !gps.GPSLongitudeRef) {
             reject('no_exif');
+          } else {
+            db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername, originalname, deletehash) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+              [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, comment, ires.data.link, fileNameOnServer, ires.data.deletehash])
+            .then((dbdata) => {
+              resolve(dbdata);
+            })
+            .catch((error) => {
+              reject(error);
+            });
           }
-
-          db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername, originalname, deletehash) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-            [gps.GPSLatitude, gps.GPSLatitudeRef, gps.GPSLongitude, gps.GPSLongitudeRef, comment, ires.data.link, fileNameOnServer, ires.data.deletehash])
-        .then((dbdata) => {
-          resolve(dbdata);
-        })
-        .catch((error) => {
-          reject(error);
-        });
         });
       }, (error) => {
         reject(error);
