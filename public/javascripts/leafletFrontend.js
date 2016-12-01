@@ -58,7 +58,6 @@ function convertDMSToDD(degrees, minutes, seconds, direction) {
 
 function displayMarkers() {
   for (let i = 0; i < data.length; i++) {
-    console.log('data[i][3]: ' + data[i][3]);
     marker = new L.marker([data[i][0], data[i][1]])
     .bindPopup('<img style="width:100%"  id="image"+ i alt="' + data[i][2] + '" src="' + data[i][3] + '" ><br>' + data[i][2], { minWidth:100 })
     .addTo(mymap).on('click', onClick);

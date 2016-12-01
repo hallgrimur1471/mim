@@ -2,7 +2,6 @@ const express = require('express');
 const multer = require('multer'); // used for uploading files
 const imageprocess = require('./imageProcess.js');
 const pgp = require('pg-promise')();
-const xss = require('xss');
 
 const router = express.Router();
 const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@localhost/mimdb2';
@@ -15,7 +14,7 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
-  }
+  },
 });
 
 const upload = multer({ storage });
@@ -58,12 +57,11 @@ router.post('/', upload.single('myFile'), (req, res, next) => {
     res.redirect('/import');
   })
   .catch((error) => {
-    console.log('!ERROR!: ' + error);
-    if( error === 'Error: No Exif segment found in the given image.' ) {
+    if (error === 'Error: No Exif segment found in the given image.') {
       res.render('error', {
-      title: 'No GPS data',
-      message: 'The image you tried to import does not contain GPS EXIF data, '
-             + 'you have to import an image that is geotagged.' });
+        title: 'No GPS data',
+        message: 'The image you tried to import does not contain GPS EXIF data, '
+               + 'you have to import an image that is geotagged.' });
     }
     displayUserErrorMessage(res);
   });

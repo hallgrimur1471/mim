@@ -6,8 +6,6 @@ const fs = require('fs');
 function processImage(destination, fileNameOnServer, comment, db) {
   const promise = new Promise(
     (resolve, reject) => {
-      console.log("fileNameOnServer: " + fileNameOnServer);
-      console.log("destinaton + fileNameOnServer: " + destination + fileNameOnServer);
       exif.getExifData(destination, fileNameOnServer, function exifDataResponse(result) {
         const gps = result.gps;
 
@@ -24,7 +22,7 @@ function processImage(destination, fileNameOnServer, comment, db) {
             }
 
             if (!gps.GPSLatitude || !gps.GPSLatitudeRef || !gps.GPSLongitude || !gps.GPSLongitudeRef) {
-              reject('no exif data');
+              reject('no_exif');
             }
 
             db.none(`INSERT INTO images (gpslatitude, gpslatituderef, gpslongtitude, gpslongtituderef, comment, imageservername, originalname, deletehash) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,

@@ -13,7 +13,7 @@ const ExifImage = require('exif').ExifImage;  // used to get exif data
 function getExifData(destination, fileNameOnServer, callback, error) {
   try {
     const imagePath = destination + fileNameOnServer;
-    new ExifImage({ image : imagePath }, function (eerror, exifData) {
+    new ExifImage({ image : imagePath }, (eerror, exifData) => {
       if (eerror) {
         error(`Error: ${eerror.message}`);
       } else {
