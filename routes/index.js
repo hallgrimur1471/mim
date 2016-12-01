@@ -47,6 +47,19 @@ router.get('/api/getMarkers', (req, res, next) => {
     });
 });
 
+/* GET exif error. */
+router.get('/noExif', (req, res, next) => {
+  res.render('error', {
+    title: 'No GPS data',
+    message: 'The image you tried to import does not contain GPS EXIF data, '
+           + 'you have to import an image that is geotagged.' });
+});
+
+/* GET error. */
+router.get('/error', (req, res, next) => {
+  displayUserErrorMessage(res);
+});
+
 /* POST image. */
 router.post('/', upload.single('myFile'), (req, res, next) => {
   const destination = req.file.destination;
@@ -58,12 +71,9 @@ router.post('/', upload.single('myFile'), (req, res, next) => {
   })
   .catch((error) => {
     if (error === 'Error: No Exif segment found in the given image.') {
-      res.render('error', {
-        title: 'No GPS data',
-        message: 'The image you tried to import does not contain GPS EXIF data, '
-               + 'you have to import an image that is geotagged.' });
+      res.redirect('/noExif');
     }
-    displayUserErrorMessage(res);
+    res.redirect('/error');
   });
 });
 
