@@ -2,20 +2,20 @@ const express = require('express');
 const multer = require('multer'); // used for uploading files
 const imageprocess = require('./imageProcess.js');
 const pgp = require('pg-promise')();
+const xss = require('xss');
 
 const router = express.Router();
-const DATABASE = process.env.DATABASE_URL ||
-  'postgres://hallgrimur1471:pass@localhost/mimdb2';
+const DATABASE = process.env.DATABASE_URL || 'postgres://hallgrimur1471:pass@localhost/mimdb2';
 const db = pgp(DATABASE);
 
 // location to temporarily store images before imgur upload
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: function (req, file, cb) {
     cb(null, 'public/images/');
   },
-  filename: (req, file, cb) => {
+  filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname);
-  },
+  }
 });
 
 const upload = multer({ storage });
