@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "lint": "node ./node_modules/eslint/bin/eslint.js ./**/*.js"
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./routes/**/*.js",
+    "lint2": "node ./node_modules/eslint/bin/eslint.js ./public/javascripts/**/*.js"
   },
   "dependencies": {
     "body-parser": "~1.15.2",

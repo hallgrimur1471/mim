@@ -4,7 +4,6 @@ const ExifImage = require('exif').ExifImage;  // used to get exif data
  * with the name 'fileNameOnServer', eg:
  * destination: 'uploads/'
  * fileNameOnServer: 'image1.jpg'
- * 
  * @param {string} destination
  * @param {string} fileNameOnServer
  * @param {function} callback
@@ -14,18 +13,18 @@ const ExifImage = require('exif').ExifImage;  // used to get exif data
 function getExifData(destination, fileNameOnServer, callback, error) {
   try {
     const imagePath = destination + fileNameOnServer;
-    console.log('IMAGEPATH:\n' + imagePath);
-    new ExifImage({ image : imagePath }, function exifResponse(error, exifData) {
-      if (error)
-        error('Error: '+error.message);
-      else
+    new ExifImage({ image : imagePath }, function exifResponse(eerror, exifData) {
+      if (eerror) {
+        error(`Error: ${eerror.message}`);
+      } else {
         callback(exifData);
+      }
     });
-  } catch (error) {
-    error('Error: ' + error.message);
+  } catch (eerror) {
+    error(`Error: ${eerror.message}`);
   }
 }
 
 module.exports = {
-  getExifData
-}
+  getExifData,
+};

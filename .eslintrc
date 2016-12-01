@@ -4,16 +4,30 @@
   "rules": {
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.spec.js"]}],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-param-reassign": [2, { 
-        "props": false
+    "no-param-reassign": [0, { 
+      "props": false
     }],
-    "max-len": ["error", 80],
+    "prefer-arrow-callback": [2, {
+      "allowNamedFunctions": true
+    }
+    ],
+    "max-len": ["error", 250],
     "no-unused-vars": ["error", { "args": "none" }],
-    "new-cap": ["error", { "capIsNew": false }],
+    "new-cap": [0, { "capIsNew": false }],
     "indent": ["error", 2],
     "quotes": 0,
     "key-spacing": 0,
     "object-shorthand": 0,
+    "no-new": 0,
+    "no-undef": 0,
+    "func-names": 0,
+    "eqeqeq": 0,
+    "no-underscore-dangle": 0,
+    "no-use-before-define": 0,
+    "prefer-template": 0,
+    "operator-assignment": 0,
+    "no-mixed-operators": 0,
+    "camelcase": 0,
   },
   "env": {
     "browser": true,
