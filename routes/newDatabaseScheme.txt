@@ -1,0 +1,10 @@
+CREATE TABLE images(
+GPSLatitude varchar(256),
+GPSLatitudeRef varchar(256),
+GPSLongtitude varchar(256),
+GPSLongtitudeRef varchar(256),
+comment varchar(256),
+imageServerName varchar(256),
+deletehash varchar(256),
+PRIMARY KEY (imageServerName)
+);
