@@ -14,11 +14,11 @@ const storage = multer.diskStorage({
     cb(null, 'public/images/');
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, Date.now() + '-' + file.originalname);
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 function displayUserErrorMessage(res) {
   res.render('error', {
@@ -58,7 +58,7 @@ router.post('/', upload.single('myFile'), (req, res, next) => {
     res.redirect('/import');
   })
   .catch((error) => {
-    displayUserErrorMessage();
+    displayUserErrorMessage(res);
   });
 });
 
