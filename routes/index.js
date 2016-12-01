@@ -48,7 +48,7 @@ router.get('/api/getMarkers', function(req, res, next) {
 /* POST image. */
 router.post('/', upload.single('myFile'), function(req, res, next) {
   console.log(req.body);
-  console.log(req.file);
+  console.log('REQ.FILE: \n' + JSON.stringify(req.file));
   console.log('SERVER FILE NAME\n' + req.file.filename);
 
   const destination = req.file.destination;
