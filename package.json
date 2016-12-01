@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./routes/**/*.js",
-    "lint2": "node ./node_modules/eslint/bin/eslint.js ./public/javascripts/**/*.js"
+    "lint2": "node ./node_modules/eslint/bin/eslint.js ./public/javascripts/**/*.js",
+    "slint": "stylelint public/stylesheets/**.*css"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -29,6 +30,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "stylelint-config-standard": "^15.0.0"
   }
 }
