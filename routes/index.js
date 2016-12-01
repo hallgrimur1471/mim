@@ -49,16 +49,22 @@ router.get('/api/getMarkers', (req, res, next) => {
 });
 
 /* POST image. */
-router.post('/', upload.single('myFile'), (req, res, next) => {
+router.post('/', upload.single('myFile'), function(req, res, next) {
+  console.log(req.body);
+  console.log(req.file);
+  console.log('SERVER FILE NAME\n' + req.file.filename);
+
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
 
   imageprocess.processImage(destination, fileNameOnServer, req.body.comment, db)
-  .then((data) => {
+  .then(data => {
+    console.log('image processed!');
     res.redirect('/import');
   })
-  .catch((error) => {
-    displayUserErrorMessage(res);
+  .catch(error => {
+    console.log('did not manage to process image');
+    displayUserErrorMessage();
   });
 });
 
