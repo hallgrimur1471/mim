@@ -6,6 +6,8 @@ const fs = require('fs');
 function processImage(destination, fileNameOnServer, comment, db) {
   const promise = new Promise(
     (resolve, reject) => {
+      console.log("fileNameOnServer: " + fileNameOnServer);
+      console.log("destinaton + fileNameOnServer: " + destination + fileNameOnServer);
       exif.getExifData(destination, fileNameOnServer, function exifDataResponse(result) {
         const gps = result.gps;
 
