@@ -18,58 +18,48 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
+
+function displayUserErrorMessage(res) {
+  res.render('error', {
+    title: 'Oh no!',
+    message: 'An unexpected error occured when making your request, '
+           + 'perhaps you can try again later.' });
+}
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index_kort');
 });
 
 /* GET page after image import (front-end notices changed url). */
-router.get('/import', function(req, res, next) {
+router.get('/import', (req, res, next) => {
   res.render('index_kort');
 });
 
 /* GET marker data. */
-router.get('/api/getMarkers', function(req, res, next) {
-
-  db.any(`SELECT * FROM images`) //LIMIT 10 OFFSET 0
-    .then(data => {
-      console.log('DATA:\n' + data[0]);
-      console.log('DATA:\n' + JSON.stringify(data));
-
+router.get('/api/getMarkers', (req, res, next) => {
+  db.any(`SELECT * FROM images`)
+    .then((data) => {
       res.send(JSON.stringify(data));
     })
-    .catch(error => {
-      displayUserErrorMessage();
+    .catch((error) => {
+      displayUserErrorMessage(res);
     });
 });
 
 /* POST image. */
-router.post('/', upload.single('myFile'), function(req, res, next) {
-  console.log(req.body);
-  console.log(req.file);
-  console.log('SERVER FILE NAME\n' + req.file.filename);
-
+router.post('/', upload.single('myFile'), (req, res, next) => {
   const destination = req.file.destination;
   const fileNameOnServer = req.file.filename;
 
   imageprocess.processImage(destination, fileNameOnServer, req.body.comment, db)
-  .then(data => {
-    console.log('image processed!');
+  .then((data) => {
     res.redirect('/import');
   })
-  .catch(error => {
-    console.log('did not manage to process image');
-    displayUserErrorMessage();
+  .catch((error) => {
+    displayUserErrorMessage(res);
   });
 });
-
-function displayUserErrorMessage() {
-  res.render('error', {
-  title: 'Oh no!',
-  message: 'An unexpected error occured when making your request, '
-         + 'perhaps you can try again later.' });
-}
 
 module.exports = router;
