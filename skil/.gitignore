@@ -1,0 +1,6 @@
+node_modules/
+public/images
+examples/exifExample/uploads/
+examples/imgurExample/routes/clientID.txt
+examples/imgurExample/routes/clientSecret.txt
+npm-debug.log

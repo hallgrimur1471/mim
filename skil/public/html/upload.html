@@ -1,0 +1,19 @@
+<div id="uploadHTML">
+  <h1>Import image</h1>
+  <p>Welcome to the Import image page!</p>
+  <span class="close" onclick="info.remove()">&times;</span>
+  <form method="POST" action="/" enctype="multipart/form-data">
+    <p></p>
+    <label for="image_title">New image title: </label>
+    <input id="image_title" type="text" name="title" placeholder="title">
+    <p></p>
+    <label for="image_comment">comment: </label>
+    <input id="image_comment" type="text" name="comment" placeholder="comment">
+    <p></p>
+    <label for="image_import">Import image: </label>
+    <input id="image_import" type="file" name="myFile" accept=".jpg">
+    <p></p>
+    <button class="btn btn-primary" type="submit">Submit
+    </button>
+  </form>
+</div>
