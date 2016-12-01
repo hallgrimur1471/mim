@@ -1,4 +1,4 @@
-# mim
+# mim - Map Image Marker
 ##Synopsis
 
 mim is a database system that allows users to upload geotagged pictures in a database. The pictures are displayed on a map where they were taken and can also be displayed.
