@@ -1,9 +1,9 @@
 # mim
-##Synopsis
+## Synopsis
 
 mim is a database system that allows users to upload geotagged pictures in a database. The pictures are displayed on a map where they were taken and can also be displayed.
 
-##Code Example
+## Code Example
 
 The mapview is build with leaflet
 ```javascript
@@ -43,12 +43,12 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
   })
 ```
 
-##Motivation
+## Motivation
 
 This is a school project in web developing. It was developed in github and deployed in heroku and can be view here "<a href="http://mapim.herokuapp.com/">Heroku</a>" in 2016.
 
 
-##Installation and setup
+## Installation and setup
 
 
 1. [Download and install Node](http://nodejs.org)
@@ -62,5 +62,5 @@ then from the mim rootfolder type:
 ⋅⋅⋅npm start
 
 
-##Getting involved
+## Getting involved
 We encourage people to get involved so feel free to make a push request.
