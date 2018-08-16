@@ -1,7 +1,9 @@
 # mim
 ## Synopsis
 
-mim is a database system that allows users to upload geotagged pictures in a database. The pictures are displayed on a map where they were taken and can also be displayed.
+mim is a webpage that allows users to upload geotagged pictures into a database. The pictures are displayed on a map where they were taken and can also be displayed.
+
+The website is hosted at mapim.herokuapp.com
 
 ## Code Example
 
@@ -11,7 +13,6 @@ var Esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/
   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
   maxZoom: 17
 });
-
 
 var mymap = L.map('mapid', {
   layers: [Esri_WorldImagery] // only add one!
@@ -25,9 +26,8 @@ var baseLayers = {
 L.control.layers(baseLayers).addTo(mymap);
 ```
 
-
 router post to import image to database and display a marker.
-```
+```javascript
 router.post('/', upload.single('myFile'), function(req, res, next) {
   console.log(req.body);
   console.log(req.file);
@@ -45,11 +45,9 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
 
 ## Motivation
 
-This is a school project in web developing. It was developed in github and deployed in heroku and can be view here "<a href="http://mapim.herokuapp.com/">Heroku</a>" in 2016.
-
+This is a school project in web developing. It was developed in github and deployed in heroku and can be viewed here "<a href="http://mapim.herokuapp.com/">Heroku</a>" in 2016.
 
 ## Installation and setup
-
 
 1. [Download and install Node](http://nodejs.org)
 
@@ -61,6 +59,6 @@ then from the mim rootfolder type:
 ⋅⋅⋅npm install
 ⋅⋅⋅npm start
 
-
 ## Getting involved
+
 We encourage people to get involved so feel free to make a push request.
