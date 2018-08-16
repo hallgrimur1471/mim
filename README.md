@@ -3,7 +3,7 @@
 
 mim is a webpage that allows users to upload geotagged pictures into a database. The pictures are displayed on a map where they were taken and can also be displayed.
 
-The website is hosted at mapim.herokuapp.com
+The website is hosted at [mapim.herokuapp.com](http://mapim.herokuapp.com)
 
 ## Code Example
 
@@ -45,7 +45,7 @@ router.post('/', upload.single('myFile'), function(req, res, next) {
 
 ## Motivation
 
-This is a school project in web developing. It was developed in github and deployed in heroku and can be viewed here "<a href="http://mapim.herokuapp.com/">Heroku</a>" in 2016.
+This is a school project in web developing. It was developed on github and deployed to heroku and can be viewed [here](http://mapim.herokuapp.com).
 
 ## Installation and setup
 
